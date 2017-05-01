@@ -18,7 +18,7 @@ void KalmanFilter::Init(VectorXd &x_in, MatrixXd &P_in, MatrixXd &F_in,
   H_ = H_in;
   R_ = R_in;
   Q_ = Q_in;
-  I_ = MatrixXd::Identity(4, 4);
+  I_ = MatrixXd::Identity(x_.size(), x_.size());
 }
 
 void KalmanFilter::Predict() {
