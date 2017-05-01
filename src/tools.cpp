@@ -1,4 +1,5 @@
 #include "tools.h"
+#include <math.h>
 
 using Eigen::VectorXd;
 using Eigen::MatrixXd;
@@ -96,11 +97,10 @@ VectorXd Tools::H_x(const Eigen::VectorXd& x_state) {
 }
 
 float Tools::NormalizeAngle(float angle) {
-  const float PI = 3.14159265;
-  int factor = angle > PI ? -1 : 1;
+  int factor = angle > M_PI ? -1 : 1;
 
-  while (fabs(angle) > PI) {
-    angle += factor*2*PI;
+  while (fabs(angle) > M_PI) {
+    angle += factor*2*M_PI;
   }
 
   return angle;
