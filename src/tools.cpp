@@ -39,12 +39,10 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
   float vy = x_state(3);
 
   if (fabs(px) < 0.001) {
-    assert(false);
     px = 0.001;
   }
 
   if (fabs(py) < 0.001) {
-    assert(false);
     py = 0.001;
   }
 
