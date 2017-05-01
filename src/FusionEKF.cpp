@@ -103,19 +103,22 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
    *  Prediction
    ****************************************************************************/
 
-  ekf_.F_(0, 2) = dt;
-  ekf_.F_(1, 3) = dt;
+  // only if dt has an acceptable value ( > 0.001 ).
+  if (dt > 0.001) {
+    ekf_.F_(0, 2) = dt;
+    ekf_.F_(1, 3) = dt;
 
-  ekf_.Q_(0, 0) = dt_4/4*noise_ax_;
-  ekf_.Q_(0, 2) = dt_3/2*noise_ax_;
-  ekf_.Q_(1, 1) = dt_4/4*noise_ay_;
-  ekf_.Q_(1, 3) = dt_3/2*noise_ay_;
-  ekf_.Q_(2, 0) = dt_3/2*noise_ax_;
-  ekf_.Q_(2, 2) = dt_2*noise_ax_;
-  ekf_.Q_(3, 1) = dt_3/2*noise_ay_;
-  ekf_.Q_(3, 3) = dt_2*noise_ay_;
-
-  ekf_.Predict();
+    ekf_.Q_(0, 0) = dt_4/4*noise_ax_;
+    ekf_.Q_(0, 2) = dt_3/2*noise_ax_;
+    ekf_.Q_(1, 1) = dt_4/4*noise_ay_;
+    ekf_.Q_(1, 3) = dt_3/2*noise_ay_;
+    ekf_.Q_(2, 0) = dt_3/2*noise_ax_;
+    ekf_.Q_(2, 2) = dt_2*noise_ax_;
+    ekf_.Q_(3, 1) = dt_3/2*noise_ay_;
+    ekf_.Q_(3, 3) = dt_2*noise_ay_;
+    
+    ekf_.Predict();
+  }
 
   /*****************************************************************************
    *  Update
