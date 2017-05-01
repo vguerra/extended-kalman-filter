@@ -100,11 +100,5 @@ VectorXd Tools::H_x(const Eigen::VectorXd& x_state) {
 }
 
 float Tools::NormalizeAngle(float angle) {
-  int factor = angle > M_PI ? -1 : 1;
-
-  while (fabs(angle) > M_PI) {
-    angle += factor*2*M_PI;
-  }
-
-  return angle;
+  return atan2(sin(angle), cos(angle));
 }
