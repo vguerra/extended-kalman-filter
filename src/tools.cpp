@@ -85,6 +85,11 @@ VectorXd Tools::H_x(const Eigen::VectorXd& x_state) {
   float vy = x_state(3);
 
   float ro = sqrt(px*px + py*py);
+
+  if (ro < 0.001) {
+    ro = 0.001;
+  }
+
   float phi = atan2(py, px);
   float ro_dot = (px*vx + py*vy)/ro;
 
